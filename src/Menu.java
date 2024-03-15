@@ -28,20 +28,14 @@ public class Menu {
                 break;
             case 3:
                 String tipoBusqueda = LerDatos.lerString("Introduce el tipo de arma que quieres buscar: ");
-                ArrayList<Arma> armasPorTipo = fm.buscarArmaPorTipo(tipoBusqueda);
                 System.out.println("Estas son las armas del tipo que estas buscando");
-                for (int i = 0; i < armasPorTipo.size(); i++){
-                    System.out.println("ID "+(i+1)+" "+armasPorTipo.get(i).toString());
-                }
+                fm.buscarArmaPorTipo(tipoBusqueda);
                 pintarMenu(fm);
                 break;
             case 4:
                 String rarezaBusqueda = LerDatos.lerString("Introduce la rareza por la que quiere buscar:");
-                ArrayList<Skin> skinsPorRareza = fm.mostrarSkinsPorRareza(rarezaBusqueda);
                 System.out.println("Estas son las Skins del tipo de rareza que buscas");
-                for (int i = 0; i < skinsPorRareza.size(); i++){
-                    System.out.println("ID "+(i+1)+" "+skinsPorRareza.get(i).toString());
-                }
+                fm.mostrarSkinsPorRareza(rarezaBusqueda);
                 pintarMenu(fm);
                 break;
             case 5:
@@ -52,6 +46,7 @@ public class Menu {
             case 6:
                 fm.mostrarSkins();
                 String nombreEliminar = LerDatos.lerString("Introduce el nombre del arma que quieres eliminar:");
+                fm.eliminarSkin(nombreEliminar);
                 System.out.println("Skin eliminada");
                 pintarMenu(fm);
                 break;

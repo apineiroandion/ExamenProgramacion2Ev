@@ -15,25 +15,22 @@ public class ForniteManagerImpl implements ForniteManager{
     }
 
     @Override
-    public ArrayList<Arma> buscarArmaPorTipo(String tipo) {
-        ArrayList<Arma> armasTipo = new ArrayList<>();
+    public void buscarArmaPorTipo(String tipo) {
         for(int i = 0;i < armas.size(); i++){
             if (armas.get(i).getTipo().equals(tipo)){
-                armasTipo.add(armas.get(i));
+                System.out.println("ID: "+(i)+" "+armas.get(i).toString());
             }
         }
-        return armasTipo;
     }
 
     @Override
-    public ArrayList<Skin> mostrarSkinsPorRareza(String rareza) {
+    public void mostrarSkinsPorRareza(String rareza) {
         ArrayList<Skin> skinsTipo = new ArrayList<>();
         for(int i = 0; i < skins.size(); i++){
             if (skins.get(i).getRareza().equals(rareza)){
-                skinsTipo.add(skins.get(i));
+                System.out.println("ID: "+(i)+" "+skins.get(i).toString());
             }
         }
-        return skinsTipo;
     }
 
     @Override
@@ -41,19 +38,25 @@ public class ForniteManagerImpl implements ForniteManager{
         System.out.println("Introduce el indice del arma que quieres borrar: ");
         for (int i = 0; i < armas.size(); i++){
             if(armas.get(i).getTipo().equals(tipo)) {
-                System.out.println("ID " + (i + 1) + " " + armas.get(i).toString());
+                System.out.println("ID " + (i) + " " + armas.get(i).toString());
             }
         }
-        Integer armaElegida = LerDatos.lerEnteiro("Elige el indice del arma que quieres borrar")-1;
-        armas.remove(armaElegida);
-        System.out.println("El arma ha sido eliminada");
+        Integer armaElegida = LerDatos.lerEnteiro("Elige el indice del arma que quieres borrar");
+        try{
+            armas.remove(armas.get(armaElegida));
+            System.out.println("El arma ha sido eliminada");
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("no existe el indice");
+        }
+
+
     }
 
     @Override
     public void eliminarSkin(String nombre) {
         for (int i = 0; i < skins.size(); i++){
             if (skins.get(i).getNombre().equals(nombre)){
-                skins.remove(this);
+                skins.remove(skins.get(i));
             }
         }
     }
@@ -63,5 +66,21 @@ public class ForniteManagerImpl implements ForniteManager{
         for (int i = 0; i < skins.size(); i++){
             System.out.println(skins.get(i).toString());
         }
+    }
+
+    public ArrayList<Arma> getArmas() {
+        return armas;
+    }
+
+    public void setArmas(ArrayList<Arma> armas) {
+        this.armas = armas;
+    }
+
+    public ArrayList<Skin> getSkins() {
+        return skins;
+    }
+
+    public void setSkins(ArrayList<Skin> skins) {
+        this.skins = skins;
     }
 }
